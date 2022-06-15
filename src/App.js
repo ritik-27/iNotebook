@@ -1,26 +1,42 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import Navbar from './components/Navbar';
-import Home from './components/Home';
+import { Home } from './components/Home';
 import About from './components/About';
-import Notestate from './context/notes/notestate';
-import Alert from './components/Alert';
+import NoteState from './context/notes/NoteState';
+import { Alert } from './components/Alert';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 function App() {
   return (
     <>
-      <Notestate>
+      <NoteState>
         <Router>
           <Navbar />
-          <Alert message={"sucess"}/>
+          <Alert message="This is amazing React course" />
           <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+            </Switch>
           </div>
         </Router>
-      </Notestate>
+      </NoteState>
     </>
   );
 }

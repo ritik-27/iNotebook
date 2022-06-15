@@ -1,20 +1,19 @@
-const connectToMongo = require("./db");
-const express = require("express");
-var cors = require("cors");
+const connectToMongo = require('./db');
+const express = require('express')
+var cors = require('cors') 
 
 connectToMongo();
+const app = express()
+const port = 5000
 
-const app = express();
-const port = 5000;
+app.use(cors())
+app.use(express.json())
 
-//Middleware
-app.use(express.json());
-app.use(cors());
+// Available Routes
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/notes', require('./routes/notes'))
 
-//Available Routed
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/notes", require("./routes/notes"));
 
 app.listen(port, () => {
-    console.log(`iNotebook backend listening on port http://localhost:${port}`);
-});
+  console.log(`iNotebook backend listening at http://localhost:${port}`)
+})
